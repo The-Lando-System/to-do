@@ -5,11 +5,14 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+//var jwt = require('jsonwebtoken');
 
 // Configuration ======================
 var db = require('./config/db');
 var port = process.env.PORT || 8080;
 mongoose.connect(db.url);
+var secret = require('./config/secret');
+app.set('superSecret', secret.str);
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ 'extended':'true' }));
