@@ -1,0 +1,11 @@
+{
+  "name": "node-todo-app",
+  "version": "0.0.0",
+  "dependencies": {
+    "bootstrap": "latest",
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest" 
+  }
+}

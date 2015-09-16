@@ -1,0 +1,14 @@
+{
+  "name": "node-todo-app",
+  "version": "0.0.0",
+  "description": "Basic To-Do App",
+  "main": "server.js",
+  "author": "The-Lando-System",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.1.7",
+    "morgan": "^1.6.1"
+  }
+}
