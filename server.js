@@ -5,11 +5,10 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-//var jwt = require('jsonwebtoken');
 
 // Configuration ======================
 var db = require('./config/db');
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 3000;
 mongoose.connect(db.url);
 var secret = require('./config/secret');
 app.set('superSecret', secret.str);

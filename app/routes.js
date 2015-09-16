@@ -28,7 +28,7 @@ module.exports = function(app) {
 	});
 
 
-	// To-Do API Routes ==============================
+	// Global To-Do API Routes ==============================
 	apiRoutes.get('/todos', function(req,res){
 		Todo.find(function(err,todos){
 			if (err) { res.send(err) };
@@ -38,6 +38,7 @@ module.exports = function(app) {
 	apiRoutes.post('/todos', function(req,res){
 		Todo.create({
 			text: req.body.text,
+			username: req.body.username,
 			done: false
 		}, function(err,todo){
 			if (err) { res.send(err) };
@@ -57,6 +58,50 @@ module.exports = function(app) {
 				res.json(todos);
 			});
 		});
+	});
+
+	// User specific To-Do API routes ===========================
+	apiRoutes.get('/todos/:username', function(req,res){
+		if (req.decoded.username === req.params.username) {
+			Todo.find({ username:req.params.username },function(err,todos){
+				if (err) { res.send(err) };
+				res.json(todos);
+			});
+		} else {
+			res.json({ message: 'You are not authorized to view to-dos for ' + req.params.username });
+		}
+	});
+	apiRoutes.post('/todos/:username', function(req,res){
+		if (req.decoded.username === req.params.username) {
+			Todo.create({
+				text: req.body.text,
+				username: req.params.username,
+				done: false
+			}, function(err,todo){
+				if (err) { res.send(err) };
+				Todo.find(function(err,todos){
+					if (err) { res.send(err) };
+					res.json({ message: 'To-Do successfully added!' });
+				});
+			});
+		} else {
+			res.json({ message: 'You are not authorized to create to-dos for ' + req.params.username });
+		}
+	});
+	apiRoutes.delete('/todos/:username/:todo_id', function(req,res){
+		if (req.decoded.username === req.params.username) {
+			Todo.remove({
+				_id: req.params.todo_id
+			}, function(err,todo){
+				if (err) { res.send(err) };
+				Todo.find(function(err,todos){
+					if (err) { res.send(err) };
+					res.json({ message: 'To-Do successfully removed!' });
+				});
+			});
+		} else {
+			res.json({ message: 'You are not authorized to delete to-dos for ' + req.params.username });
+		}
 	});
 
 	// User Routes, not exposed at the API level ======================
@@ -104,7 +149,7 @@ module.exports = function(app) {
 	// User Authentication
 	app.post('/authenticate', function(req,res){
 		User.findOne({
-			username: req.body.username
+			username: req.body.username		
 		}, function(err,user){
 			if (err) throw err;
 			if (!user) {
