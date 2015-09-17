@@ -13,3 +13,15 @@ body {
 #todo-list {
 	margin-bottom: 30px;
 }
+
+#todo-form {
+	margin-bottom: 30px;
+}
+
+.login-form-group input {
+	margin-bottom: 10px;
+}
+
+#logout-button {
+	margin-top: 10px;
+}

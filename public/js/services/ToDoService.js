@@ -1,13 +1,19 @@
 myApp.factory('ToDoService', function($http) {
 	return {
-        get : function() {
-            return $http.get('/api/todos');
+        get : function(username,token) {
+            return $http.get('/user/todos/' + username, {
+            	headers: { 'x-access-token': token }
+            });
         },
-        create : function(newTodo) {
-            return $http.post('/api/todos', newTodo);
+        create : function(username,token,newTodo) {
+            return $http.post('/user/todos/' + username, newTodo, {
+    			headers: { 'x-access-token': token }
+    		});
         },
-        delete : function(id) {
-            return $http.delete('/api/todos/' + id);
+        delete : function(username,token,id) {
+            return $http.delete('/user/todos/' + username + '/' + id, {
+            	headers: { 'x-access-token': token }
+            });
         }
     }
 });

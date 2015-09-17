@@ -20,6 +20,8 @@
   <!-- SPELLS -->
   <script src="libs/jquery/jquery-2.1.4.js"></script>
   <script src="libs/angular-1.4.5/angular.js"></script>
+  <script src="libs/angular-cookies/angular-cookies.js"></script>
+  <script src="libs/angular-jwt/dist/angular-jwt.js"></script>
 
   <!-- MY SPELLS -->
   <script src="js/app.js"></script>
@@ -33,11 +35,11 @@
 
     <!-- HEADER AND TODO COUNT -->
     <div class="jumbotron text-center">
-      <h1>To-Do List <span class="label label-info">{{ todos.length }}</span></h1>
+      <h1>To-Do List <span class="label label-info" ng-show="userLoggedIn">{{ todos.length }}</span></h1>
     </div>
 
     <!-- TODO LIST -->
-    <div id="todo-list" class="row">
+    <div id="todo-list" class="row" ng-show="userLoggedIn">
       <div class="col-sm-4 col-sm-offset-4">
 
         <!-- LOOP OVER THE TODOS IN $scope.todos -->
@@ -51,13 +53,28 @@
     </div>
 
     <!-- FORM TO CREATE TODOS -->
-    <div id="todo-form" class="row">
+    <div id="todo-form" class="row" ng-show="userLoggedIn">
       <div class="col-sm-8 col-sm-offset-2 text-center">
         <form>
           <div class="form-group">
             <input type="text" class="form-control input-lg text-center" placeholder="What do you want to do?" ng-model="formData.text">
           </div>
           <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+        </form>
+        <button id="logout-button" type="submit" class="btn btn-danger btn-lg" ng-click="logout()">Logout</button>
+      </div>
+    </div>
+
+    <!-- FORM TO CREATE TODOS -->
+    <div id="login-form" class="row" ng-hide="userLoggedIn">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <h2>Please Login</h2>
+        <form>
+          <div class="login-form-group">
+            <input type="text" class="form-control input-md text-center" placeholder="username" ng-model="creds.username">
+            <input type="password" class="form-control input-md text-center" placeholder="password" ng-model="creds.password">
+          </div>
+          <button type="submit" class="btn btn-success btn-lg" ng-click="login()">Login</button>
         </form>
       </div>
     </div>
