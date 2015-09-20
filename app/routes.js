@@ -192,7 +192,7 @@ module.exports = function(app) {
 	app.use('/admin',adminApiRoutes);
 
 	// Application Routes ======================
-	app.get('*', function(req,res){
+	app.get('/', function(req,res){
 		res.sendfile('./public/views/index.html');
 	});
 
