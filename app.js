@@ -34,6 +34,6 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 require('./app/routes')(app)
 
 // Listen (Start the app with node server.js) ==============
-app.listen(port);
-console.log('App is listening on port ' + port);
+//app.listen(port);
+//console.log('App is listening on port ' + port);
 exports = module.exports = app;
