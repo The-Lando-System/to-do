@@ -1,9 +1,5 @@
-myApp.controller('mainController', function($scope,$http,$cookies,jwtHelper,ToDoService) {
+myApp.controller('mainController', function($scope,$http,$cookies,$location,jwtHelper,ToDoService) {
 	$scope.formData = {};
-
-	angular.element(document).ready(function () {
-		startUserSession();
-	});
 
 	$scope.createTodo = function(){
 		ToDoService.create($scope.user.username,$scope.userToken,{
@@ -36,6 +32,7 @@ myApp.controller('mainController', function($scope,$http,$cookies,jwtHelper,ToDo
 		.success(function(data){
 			$cookies.put('token',data.token);
 			startUserSession();
+			$location.path('to-do-list');
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
@@ -46,9 +43,10 @@ myApp.controller('mainController', function($scope,$http,$cookies,jwtHelper,ToDo
 		$cookies.remove('token');
 		$scope.userLoggedIn = false;
 		$scope.creds = {};
+		$location.path('login');
 	};
 
-	var startUserSession = function(){
+	var startUserSession = function() {
 		$scope.userToken = $cookies.get('token');
 
 		if ($scope.userToken) {
@@ -67,5 +65,9 @@ myApp.controller('mainController', function($scope,$http,$cookies,jwtHelper,ToDo
 			console.log('Error: ' + data);
 		});
 	};
+
+	angular.element(document).ready(function () {
+		startUserSession();
+	});
 
 });

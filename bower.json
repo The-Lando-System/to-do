@@ -1,6 +1,6 @@
 {
-  "name": "node-todo-app",
-  "version": "0.0.0",
+  "name": "todo-app",
+  "version": "1.0.0",
   "dependencies": {
     "bootstrap": "latest",
     "font-awesome": "latest",
@@ -8,6 +8,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-cookies": "latest",
-    "angular-jwt": "latest"
+    "angular-jwt": "latest",
+    "angular-ui-router": "latest"
   }
 }

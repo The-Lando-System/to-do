@@ -1,0 +1,34 @@
+<div class="container">
+
+  <!-- HEADER AND TODO COUNT -->
+  <div class="jumbotron text-center">
+    <h1>To-Do List <span class="label label-info" ng-show="userLoggedIn">{{ todos.length }}</span></h1>
+  </div>
+
+  <!-- TODO LIST -->
+  <div id="todo-list" class="row" ng-show="userLoggedIn">
+    <div class="col-sm-4 col-sm-offset-4">
+
+      <!-- LOOP OVER THE TODOS IN $scope.todos -->
+      <div class="checkbox" ng-repeat="todo in todos">
+        <label>
+          <input type="checkbox" ng-click="deleteToDo(todo._id)"> {{ todo.text }}
+        </label>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FORM TO CREATE TODOS -->
+  <div id="todo-form" class="row" ng-show="userLoggedIn">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg text-center" placeholder="What do you want to do?" ng-model="formData.text">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+      </form>
+      <button id="logout-button" type="submit" class="btn btn-danger btn-lg" ng-click="logout()">Logout</button>
+    </div>
+  </div>
+</div>
