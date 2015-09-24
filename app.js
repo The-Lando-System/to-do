@@ -15,10 +15,8 @@ try {
 	console.log('No config file detected, assuming production environment variables')
 }
 
-
 var dbUrl =  devConfig ? devConfig.db : process.env.DB_URL;
 var secretStr = devConfig ? devConfig.secret : process.env.SECRET;
-var port = process.env.PORT || 9943;
 
 mongoose.connect(dbUrl);
 app.set('superSecret', secretStr);
@@ -33,7 +31,5 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 // Routes ==============================
 require('./app/routes')(app)
 
-// Listen (Start the app with node server.js) ==============
-//app.listen(port);
-//console.log('App is listening on port ' + port);
+// Export the app ======================
 exports = module.exports = app;

@@ -9,9 +9,6 @@ var adminApiRoutes = express.Router();
 
 module.exports = function(app) {
 
-	
-
-
 	// Admin To-Do API Routes ==============================
 	adminApiRoutes.use(function(req,res,next){
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -151,11 +148,11 @@ module.exports = function(app) {
 		User.findById(req.params.id, function(err,user){
 			if (err) { res.send(err) };
 			user.firstName = req.body.firstName || user.firstName;
-			user.lastName = req.body.lastName || user.lastName;
-			user.email = req.body.email || user.email;
-			user.username = req.body.username || user.username;
-			user.password = req.body.password || user.password;
-			user.role = req.body.role || user.role;
+			user.lastName  = req.body.lastName  || user.lastName;
+			user.email     = req.body.email     || user.email;
+			user.username  = req.body.username  || user.username;
+			user.password  = req.body.password  || user.password;
+			user.role      = req.body.role      || user.role;
 			user.save(function(err){
 				if (err) { res.send(err) };
 				res.json({ message: 'User with ID ' + req.params.id + ' was successfully updated!' });
