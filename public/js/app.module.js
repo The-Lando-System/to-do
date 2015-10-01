@@ -7,18 +7,23 @@ var myApp = angular.module('myApp', [
 
 .config(['$urlRouterProvider','$stateProvider', function($urlRouterProvider,$stateProvider) {
 	$urlRouterProvider
-	.otherwise('/');
+	.otherwise('/login');
 
 	$stateProvider
 	.state('login', {
 		url: '/login',
 		templateUrl: '/login',
-		controller: 'mainController'
+		controller: 'loginController'
+	})
+	.state('lists', {
+		url: '/user-lists',
+		templateUrl: '/user-lists',
+		controller: 'userListsController'
 	})
 	.state('to-do-list', {
 		url: '/to-do-list',
 		templateUrl: '/to-do-list',
-		controller: 'mainController'
+		controller: 'listController'
 	});
 
 }]);

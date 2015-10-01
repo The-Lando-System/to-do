@@ -29,7 +29,9 @@ app.use(bodyParser.json({ type:'application/vnd.api+json' }));
 app.use(methodOverride('X-HTTP-Method-Override'));
 
 // Routes ==============================
-require('./app/routes')(app)
+require('./app/adminRoutes')(app);
+require('./app/userRoutes')(app);
+require('./app/routes')(app);
 
 // Export the app ======================
 exports = module.exports = app;
