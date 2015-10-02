@@ -5,6 +5,19 @@
   <ul id="user-lists" class="nav nav-pills nav-stacked" ng-repeat="list in lists">
   	<li role="presentation" class=""><a ui-sref="to-do-list({ listId:list._id })">{{list.name}}</a></li>
   </ul>
+
+  <!-- FORM TO CREATE LIST -->
+  <div id="list-form" class="row" ng-show="userLoggedIn">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newList.name">
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg" ng-click="createList()">Create</button>
+      </form>
+    </div>
+  </div>
+
   <div class="row">
   	<div class="col-sm-8 col-sm-offset-2 text-center">
   	  <button id="logout-button" type="submit" class="btn btn-danger btn-lg" ng-click="logout()">Logout</button>

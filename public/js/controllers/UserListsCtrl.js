@@ -12,6 +12,20 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 		});
 	};
 
+	$scope.createList = function(){
+		ListFactory.create($scope.user.username,$scope.userToken,{
+			name: $scope.newList.name,
+			username: $scope.user.username
+		})
+		.success(function(data){
+			$scope.newList = {};
+			getLists();
+		})
+		.error(function(data){
+			console.log('Error: ' + data);
+		});
+	};
+
 	$scope.logout = function(){
 		$cookies.remove('token');
 		$scope.userLoggedIn = false;
