@@ -4,7 +4,7 @@ myApp.controller('loginController', function($scope,$http,$cookies,$location,jwt
 		.success(function(data){
 			$cookies.put('token',data.token);
 			startUserSession();
-			$location.path('to-do-list');
+			$location.path('user-lists');
 		})
 		.error(function(data){
 			console.log('Error: ' + data);

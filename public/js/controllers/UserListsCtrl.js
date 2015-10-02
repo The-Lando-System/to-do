@@ -12,6 +12,13 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 		});
 	};
 
+	$scope.logout = function(){
+		$cookies.remove('token');
+		$scope.userLoggedIn = false;
+		$scope.creds = {};
+		$location.path('login');
+	};
+
 	// TO-DO: Make this a service or something
 	var startUserSession = function() {
 		$scope.userToken = $cookies.get('token');

@@ -1,8 +1,9 @@
 <div class="container">
+  <a ui-sref="lists">Back to my lists</a>
 
   <!-- HEADER AND TODO COUNT -->
   <div class="jumbotron text-center">
-    <h1>To-Do List <span class="label label-info" ng-show="userLoggedIn">{{ todos.length }}</span></h1>
+    <h1>{{list.name}} <span class="label label-info" ng-show="userLoggedIn">{{ todos.length }}</span></h1>
   </div>
 
   <!-- TODO LIST -->
@@ -28,7 +29,6 @@
         </div>
         <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
       </form>
-      <button id="logout-button" type="submit" class="btn btn-danger btn-lg" ng-click="logout()">Logout</button>
     </div>
   </div>
 </div>

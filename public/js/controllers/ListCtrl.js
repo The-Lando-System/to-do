@@ -1,8 +1,9 @@
-myApp.controller('listController', function($scope,$http,$cookies,$location,jwtHelper,ToDoFactory) {
+myApp.controller('listController', function($scope,$http,$cookies,$location,$stateParams,jwtHelper,ToDoFactory,ListToDoFactory,ListFactory) {
 	$scope.formData = {};
+	$scope.listId = $stateParams.listId;
 
 	var getToDos = function(){
-		ToDoFactory.get($scope.user.username,$scope.userToken)
+		ListToDoFactory.get($scope.user.username,$scope.userToken,$scope.listId)
 		.success(function(data){
 			$scope.todos = data;
 		})
@@ -11,8 +12,20 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,jwtH
 		});
 	};
 
+	var getListData = function(){
+		ListFactory.get($scope.user.username,$scope.userToken)
+		.success(function(data){
+			for (var i=0;i<data.length;i++){
+				if (data[i]._id === $scope.listId) {
+					$scope.list = data[i];
+					break;
+				}
+			}
+		});
+	};
+
 	$scope.createTodo = function(){
-		ToDoFactory.create($scope.user.username,$scope.userToken,{
+		ListToDoFactory.create($scope.user.username,$scope.userToken,$scope.listId,{
 			text: $scope.formData.text,
 			username: $scope.user.username
 		})
@@ -37,13 +50,6 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,jwtH
 		});
 	};
 
-	$scope.logout = function(){
-		$cookies.remove('token');
-		$scope.userLoggedIn = false;
-		$scope.creds = {};
-		$location.path('login');
-	};
-
 	// TO-DO: Make this a service or something
 	var startUserSession = function() {
 		$scope.userToken = $cookies.get('token');
@@ -57,5 +63,6 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,jwtH
 
 	angular.element(document).ready(function () {
 		startUserSession();
+		getListData();
 	});
 });

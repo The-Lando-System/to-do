@@ -21,7 +21,7 @@ var myApp = angular.module('myApp', [
 		controller: 'userListsController'
 	})
 	.state('to-do-list', {
-		url: '/to-do-list',
+		url: '/to-do-list/:listId',
 		templateUrl: '/to-do-list',
 		controller: 'listController'
 	});
