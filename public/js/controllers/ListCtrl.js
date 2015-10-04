@@ -32,6 +32,7 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 		.success(function(data){
 			$scope.formData = {};
 			getToDos();
+			angular.element('#toDoInput').focus();
 		})
 		.error(function(data){
 			console.log('Error: ' + data);

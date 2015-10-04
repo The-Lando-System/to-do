@@ -1,26 +1,26 @@
 <div class="container">
+  <a ng-click="logout()" href="">Logout</a>
   <div class="jumbotron text-center">
-	<h1>{{user.firstName}} {{user.lastName}}'s To-Do Lists</h1>
+	  <h1>{{user.firstName}} {{user.lastName}}'s To-Do Lists</h1>
   </div>
-  <ul id="user-lists" class="nav nav-pills nav-stacked" ng-repeat="list in lists">
-  	<li role="presentation" class=""><a ui-sref="to-do-list({ listId:list._id })">{{list.name}}</a></li>
-  </ul>
-
-  <!-- FORM TO CREATE LIST -->
-  <div id="list-form" class="row" ng-show="userLoggedIn">
-    <div class="col-sm-8 col-sm-offset-2 text-center">
-      <form>
-        <div class="form-group">
-          <input type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newList.name">
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg" ng-click="createList()">Create</button>
-      </form>
+  <div id="user-lists" class="row">
+    <div ng-repeat="list in lists">
+      <div class="list-item col-xs-10 text-center" ui-sref="to-do-list({ listId:list._id })">
+        {{list.name}}
+      </div>
+      <div class="col-xs-2 icon-button" ng-click="deleteList(list._id)">
+        <i class="fa fa-trash"></i>
+      </div>
     </div>
   </div>
 
-  <div class="row">
-  	<div class="col-sm-8 col-sm-offset-2 text-center">
-  	  <button id="logout-button" type="submit" class="btn btn-danger btn-lg" ng-click="logout()">Logout</button>
-  	</div>
+  <!-- FORM TO CREATE LIST -->
+  <div id="list-form" class="row text-center" ng-show="userLoggedIn">
+    <div class="col-xs-10 in-line">
+      <input id="listInput" type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newList.name">
+    </div>
+    <div class="col-xs-2 in-line icon-button" ng-click="createList()">
+      <i class="fa fa-plus"></i>
+    </div>
   </div>
 </div>

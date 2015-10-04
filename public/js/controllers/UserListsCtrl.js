@@ -1,4 +1,4 @@
-myApp.controller('userListsController', function($scope,$http,$cookies,$location,jwtHelper,ListFactory) {
+myApp.controller('userListsController', function($scope,$http,$cookies,$location,jwtHelper,ListFactory,ListToDoFactory,ToDoFactory) {
 	
 	$scope.user = {};
 
@@ -20,10 +20,44 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 		.success(function(data){
 			$scope.newList = {};
 			getLists();
+			angular.element('#listInput').focus();
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
 		});
+	};
+
+	$scope.deleteList = function(id){
+		var wantToDelete = confirm('This will also delete all items in the list...\nAre you sure?');
+		if (wantToDelete) {
+			ListFactory.delete($scope.user.username,$scope.userToken,id)
+			.success(function(data){
+
+				// Delete all the to-do's in this list
+				ListToDoFactory.get($scope.user.username,$scope.userToken,id)
+				.success(function(todos){
+					for (var i=0;i<todos.length;i++){
+						ToDoFactory.delete($scope.user.username,$scope.userToken,todos[i]._id)
+						.success(function(data){
+							console.log(data);
+						})
+						.error(function(data){
+							console.log('Error: ' + data);
+						})
+					}
+				})
+				.error(function(data){
+					console.log('Error: ' + data);
+				})
+
+				$scope.lists = data;
+				console.log(data);
+				getLists();
+			})
+			.error(function(data){
+				console.log('Error: ' + data);
+			});
+		}
 	};
 
 	$scope.logout = function(){

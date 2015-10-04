@@ -35,3 +35,40 @@ body {
 #list-form {
 	margin-bottom: 30px;
 }
+
+.in-line {
+	float: left;
+}
+
+.icon-button {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 3px;
+}
+
+.icon-button:hover {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 5px;
+	margin-bottom: 3px;
+	background-color: gray;
+	color: white;
+	cursor: pointer;
+}
+
+.list-item {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 3px;
+	color: #3399FF;
+}
+
+.list-item:hover {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	background-color: #3399FF;
+	color: white;
+	cursor: pointer;
+}
