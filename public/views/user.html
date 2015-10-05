@@ -1,0 +1,65 @@
+<div class="container" ng-show="userLoggedIn">
+  <a ui-sref="users">Back to user management</a>
+  <div class="jumbotron text-center" ng-hide="isCreate">
+    <h1>{{editedUser.firstName}}  {{editedUser.lastName}}</h1>
+  </div>
+  <div class="jumbotron text-center" ng-show="isCreate">
+    <h1>Create New User</h1>
+  </div>
+  <div class="user-info">
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Username:</h4>
+      </div>
+      <div class="col-xs-8 in-line-right">
+  	    <input type="text" class="form-control input-lg text-center" placeholder="Username" ng-model="editedUser.username">
+  	  </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Password:</h4>
+      </div>
+      <div class="col-xs-8 in-line-right">
+  	    <input type="text" class="form-control input-lg text-center" placeholder="Password" ng-model="editedUser.password">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>First Name:</h4>
+      </div>
+      <div class="col-xs-8 in-line-right">
+  	    <input type="text" class="form-control input-lg text-center" placeholder="First Name" ng-model="editedUser.firstName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Last Name:</h4>
+      </div>
+      <div class="col-xs-8 in-line-right">
+  	    <input type="text" class="form-control input-lg text-center" placeholder="Last Name" ng-model="editedUser.lastName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Role:</h4>
+      </div>
+      <div class="col-xs-8 in-line-right">
+  	    <input type="text" class="form-control input-lg text-center" placeholder="Role" ng-model="editedUser.role">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-4">
+        <h4>Email:</h4>
+      </div>
+      <div class="col-xs-8 in-line-right">
+  	    <input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="editedUser.email">
+      </div>
+    </div>
+  </div>
+  <div class="row text-center" ng-hide="isCreate">
+    <button class="btn btn-primary btn-lg" ng-click="updateUser()">Update User</button>
+  </div>
+  <div class="row text-center" ng-show="isCreate">
+    <button class="btn btn-primary btn-lg" ng-click="createUser()">Create User</button>
+  </div>
+</div>

@@ -24,6 +24,16 @@ var myApp = angular.module('myApp', [
 		url: '/to-do-list/:listId',
 		templateUrl: '/to-do-list',
 		controller: 'listController'
+	})
+	.state('users', {
+		url: '/user-management',
+		templateUrl: '/user-management',
+		controller: 'userMgmtController'
+	})
+	.state('user-page', {
+		url: '/user-management/:userId',
+		templateUrl: '/user-page',
+		controller: 'userController'
 	});
 
 }]);

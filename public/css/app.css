@@ -36,8 +36,16 @@ body {
 	margin-bottom: 30px;
 }
 
-.in-line {
+.in-line-left {
 	float: left;
+}
+
+.in-line-right {
+	float: right;
+}
+
+.clear {
+	clear: both;
 }
 
 .icon-button {
@@ -71,4 +79,17 @@ body {
 	background-color: #3399FF;
 	color: white;
 	cursor: pointer;
+}
+
+.user-info {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.user-info div {
+	margin-bottom: 5px;
+}
+
+.user-create {
+	margin-top: 20px;
 }

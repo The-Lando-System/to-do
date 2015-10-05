@@ -74,6 +74,7 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 		if ($scope.userToken) {
 			$scope.user = jwtHelper.decodeToken($scope.userToken);
 			$scope.userLoggedIn = $scope.userToken ? true : false;
+			$scope.userIsAdmin = $scope.user.role === 'admin' ? true : false;
 			getLists();
 		}
 	};

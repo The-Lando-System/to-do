@@ -43,4 +43,10 @@ module.exports = function(app) {
 	app.get('/user-lists', function(req,res){
 		res.sendfile('./public/views/user-lists.html');
 	});
+	app.get('/user-management', function(req,res){
+		res.sendfile('./public/views/user-management.html');
+	});
+	app.get('/user-page', function(req,res){
+		res.sendfile('./public/views/user.html');
+	});
 };

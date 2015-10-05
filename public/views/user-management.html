@@ -1,0 +1,17 @@
+<div class="container" ng-show="userLoggedIn">
+  <a ui-sref="lists">Back to my lists</a>
+  <div class="jumbotron text-center">
+    <h1>User Management</h1>
+  </div>
+  <div ng-repeat="user in users" class="row">
+  	<div class="list-item col-xs-10 text-center" ui-sref="user-page({ userId:user._id })">
+  	  {{ user.username }}
+  	</div>
+  	<div class="col-xs-2 icon-button" ng-click="deleteUser(user)">
+      <i class="fa fa-trash"></i>
+    </div>
+  </div>
+  <div class="row text-center user-create">
+    <button class="btn btn-primary btn-lg" ui-sref="user-page">Create New User</button>
+  </div>
+</div>
