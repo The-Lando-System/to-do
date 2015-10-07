@@ -33,6 +33,8 @@ myApp.controller('userMgmtController', function($scope,$http,$cookies,$location,
 			$scope.user = jwtHelper.decodeToken($scope.userToken);
 			$scope.userLoggedIn = $scope.userToken ? true : false;
 			getUsers();
+		} else {
+			$location.path('login');
 		}
 	};
 

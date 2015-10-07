@@ -61,10 +61,13 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 	};
 
 	$scope.logout = function(){
-		$cookies.remove('token');
-		$scope.userLoggedIn = false;
-		$scope.creds = {};
-		$location.path('login');
+		var confirmLogout = confirm('Are you sure you want to logout?');
+		if (confirmLogout){
+			$cookies.remove('token');
+			$scope.userLoggedIn = false;
+			$scope.creds = {};
+			$location.path('login');
+		}
 	};
 
 	// TO-DO: Make this a service or something
@@ -76,6 +79,8 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 			$scope.userLoggedIn = $scope.userToken ? true : false;
 			$scope.userIsAdmin = $scope.user.role === 'admin' ? true : false;
 			getLists();
+		} else {
+			$location.path('login');
 		}
 	};
 

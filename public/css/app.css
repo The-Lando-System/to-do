@@ -22,6 +22,11 @@ body {
 	margin-bottom: 10px;
 }
 
+.failed-auth p {
+	color: red;
+	font-weight: bold;
+}
+
 #logout-button {
 	margin-top: 10px;
 }

@@ -46,6 +46,8 @@ myApp.controller('userController', function($scope,$http,$cookies,$location,$sta
 			$scope.user = jwtHelper.decodeToken($scope.userToken);
 			$scope.userLoggedIn = $scope.userToken ? true : false;
 			getUser();
+		} else {
+			$location.path('login');
 		}
 	};
 

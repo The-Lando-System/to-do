@@ -1,14 +1,23 @@
 myApp.controller('loginController', function($scope,$http,$cookies,$location,jwtHelper) {
-	$scope.login = function(){
-		$http.post('/authenticate',$scope.creds)
-		.success(function(data){
-			$cookies.put('token',data.token);
-			startUserSession();
-			$location.path('user-lists');
-		})
-		.error(function(data){
-			console.log('Error: ' + data);
-		});
+	$scope.authFail = false;
+
+	$scope.login = function(formIsValid){
+		if (formIsValid){	
+			$http.post('/authenticate',$scope.creds)
+			.success(function(data){
+				if (data.success){
+					$cookies.put('token',data.token);
+					startUserSession();
+					$location.path('user-lists');
+				} else {
+					$scope.authFail = true;
+					$scope.errorMessage = data.message;
+				}
+			})
+			.error(function(data){
+				console.log('Error: ' + data);
+			});
+		}
 	};
 
 	// TO-DO: Make this a service or something

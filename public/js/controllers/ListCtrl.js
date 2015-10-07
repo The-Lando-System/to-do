@@ -9,6 +9,7 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
+			$location.path('user-lists');
 		});
 	};
 
@@ -60,6 +61,8 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 			$scope.userLoggedIn = $scope.userToken ? true : false;
 			getToDos();
 			getListData();
+		} else {
+			$location.path('login');
 		}
 	};
 

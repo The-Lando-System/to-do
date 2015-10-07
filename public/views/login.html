@@ -1,18 +1,23 @@
-<div class="jumbotron text-center" ng-show="userLoggedIn">
-  <h1>You are already logged in!</h1>
-  <a ui-sref="lists">Back to my lists</a>
-</div>
+<div class="container">
+  <div class="jumbotron text-center" ng-show="userLoggedIn">
+    <h1>You are already logged in!</h1>
+    <a ui-sref="lists">Back to my lists</a>
+  </div>
 
-<!-- FORM TO LOGIN -->
-<div id="login-form" class="row" ng-hide="userLoggedIn">
-  <div class="col-sm-8 col-sm-offset-2 text-center">
-    <h2>Please Login</h2>
-    <form>
-      <div class="login-form-group">
-        <input type="text" class="form-control input-md text-center" placeholder="username" ng-model="creds.username">
-        <input type="password" class="form-control input-md text-center" placeholder="password" ng-model="creds.password">
-      </div>
-      <button type="submit" class="btn btn-success btn-lg" ng-click="login()">Login</button>
-    </form>
+  <!-- FORM TO LOGIN -->
+  <div class="row" ng-hide="userLoggedIn">
+    <div class="col-sm-8 col-sm-offset-2 text-center">
+      <h2>Please Login</h2>
+      <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
+        <div class="login-form-group" ng-class="{ 'has-error' : authFail && !loginForm.password.$pristine && !loginForm.username.$pristine }">
+          <input type="text" name="username" class="form-control input-md text-center" placeholder="username" ng-model="creds.username" required>
+          <input type="password" name="password" class="form-control input-md text-center" placeholder="password" ng-model="creds.password" required>
+        </div>
+        <div class="failed-auth" ng-show="authFail">
+          <p>{{ errorMessage }}</p>
+        </div>
+        <button type="submit" class="btn btn-success btn-lg" ng-disabled="loginForm.$invalid">Login</button>
+      </form>
+    </div>
   </div>
 </div>
