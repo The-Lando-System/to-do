@@ -3,6 +3,7 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 	$scope.listId = $stateParams.listId;
 
 	var getToDos = function(){
+		$scope.errorAttempt = false;
 		ListToDoFactory.get($scope.user.username,$scope.userToken,$scope.listId)
 		.success(function(data){
 			$scope.todos = data;
@@ -14,6 +15,7 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 	};
 
 	var getListData = function(){
+		$scope.errorAttempt = false;
 		ListFactory.get($scope.user.username,$scope.userToken)
 		.success(function(data){
 			for (var i=0;i<data.length;i++){
@@ -25,22 +27,28 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 		});
 	};
 
-	$scope.createTodo = function(){
-		ListToDoFactory.create($scope.user.username,$scope.userToken,$scope.listId,{
-			text: $scope.formData.text,
-			username: $scope.user.username
-		})
-		.success(function(data){
-			$scope.formData = {};
-			getToDos();
-			angular.element('#toDoInput').focus();
-		})
-		.error(function(data){
-			console.log('Error: ' + data);
-		});
+	$scope.errorAttempt = false;
+	$scope.createTodo = function(formIsValid){
+		if (formIsValid){
+			ListToDoFactory.create($scope.user.username,$scope.userToken,$scope.listId,{
+				text: $scope.formData.text.trim(),
+				username: $scope.user.username
+			})
+			.success(function(data){
+				$scope.formData = {};
+				getToDos();
+				angular.element('#toDoInput').focus();
+			})
+			.error(function(data){
+				console.log('Error: ' + data);
+			});
+		} else {
+			$scope.errorAttempt = true;
+		}
 	};
 
 	$scope.deleteToDo = function(id){
+		$scope.errorAttempt = false;
 		ToDoFactory.delete($scope.user.username,$scope.userToken,id)
 		.success(function(data){
 			$scope.todos = data;
@@ -68,5 +76,6 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 
 	angular.element(document).ready(function () {
 		startUserSession();
+		$scope.errorAttempt = false;
 	});
 });

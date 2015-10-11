@@ -13,18 +13,23 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 	};
 
 	$scope.createList = function(){
-		ListFactory.create($scope.user.username,$scope.userToken,{
-			name: $scope.newList.name,
-			username: $scope.user.username
-		})
-		.success(function(data){
-			$scope.newList = {};
-			getLists();
-			angular.element('#listInput').focus();
-		})
-		.error(function(data){
-			console.log('Error: ' + data);
-		});
+		if (!$scope.newList || $scope.newList.name.trim() === ''){
+			alert('Please name your list!');
+		} else {
+			ListFactory.create($scope.user.username,$scope.userToken,{
+				name: $scope.newList.name.trim(),
+				username: $scope.user.username
+			})
+			.success(function(data){
+				$scope.newList = {};
+				getLists();
+				angular.element('#listInput').focus();
+			})
+			.error(function(data){
+				console.log('Error: ' + data);
+			});
+		}
+		
 	};
 
 	$scope.deleteList = function(id){

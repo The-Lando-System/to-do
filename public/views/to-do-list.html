@@ -23,11 +23,14 @@
   <!-- FORM TO CREATE TODOS -->
   <div id="todo-form" class="row" ng-show="userLoggedIn">
     <div class="col-sm-8 col-sm-offset-2 text-center">
-      <form>
-        <div class="form-group">
-          <input id="toDoInput" type="text" class="form-control input-lg text-center" placeholder="What do you want to do?" ng-model="formData.text">
+      <form name="toDoForm" ng-submit="createTodo(toDoForm.$valid)" novalidate>
+        <div class="form-group" ng-class="{ 'has-error' : errorAttempt }">
+          <input id="toDoInput" name="newToDo" type="text" class="form-control input-lg text-center" placeholder="What do you want to do?" ng-model="formData.text" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+        <div class="failed-auth" ng-show="errorAttempt">
+          <p>To-Do cannot be blank</p>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Add</button>
       </form>
     </div>
   </div>
