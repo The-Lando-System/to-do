@@ -1,9 +1,7 @@
-myApp.controller('userListsController', function($scope,$http,$cookies,$location,jwtHelper,ListFactory,ListToDoFactory,ToDoFactory) {
+myApp.controller('userListsController', function($scope,$http,$cookies,$location,AuthService,jwtHelper,ListFactory,ListToDoFactory,ToDoFactory) {
 	
-	$scope.user = {};
-
 	var getLists = function(){
-		ListFactory.get($scope.user.username,$scope.userToken)
+		ListFactory.get($scope.userSession.user.username,$scope.userSession.token)
 		.success(function(data){
 			$scope.lists = data;
 		})
@@ -13,15 +11,15 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 	};
 
 	$scope.createList = function(){
-		if (!$scope.newList || $scope.newList.name.trim() === ''){
+		if (!$scope.newListName || $scope.newListName.trim() === ''){
 			alert('Please name your list!');
 		} else {
-			ListFactory.create($scope.user.username,$scope.userToken,{
-				name: $scope.newList.name.trim(),
-				username: $scope.user.username
+			ListFactory.create($scope.userSession.user.username,$scope.userSession.token,{
+				name: $scope.newListName.trim(),
+				username: $scope.userSession.user.username
 			})
 			.success(function(data){
-				$scope.newList = {};
+				$scope.newListName = '';
 				getLists();
 				angular.element('#listInput').focus();
 			})
@@ -35,14 +33,14 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 	$scope.deleteList = function(id){
 		var wantToDelete = confirm('This will also delete all items in the list...\nAre you sure?');
 		if (wantToDelete) {
-			ListFactory.delete($scope.user.username,$scope.userToken,id)
+			ListFactory.delete($scope.userSession.user.username,$scope.userSession.token,id)
 			.success(function(data){
 
 				// Delete all the to-do's in this list
-				ListToDoFactory.get($scope.user.username,$scope.userToken,id)
+				ListToDoFactory.get($scope.userSession.user.username,$scope.userSession.token,id)
 				.success(function(todos){
 					for (var i=0;i<todos.length;i++){
-						ToDoFactory.delete($scope.user.username,$scope.userToken,todos[i]._id)
+						ToDoFactory.delete($scope.userSession.user.username,$scope.userSession.token,todos[i]._id)
 						.success(function(data){
 							console.log(data);
 						})
@@ -66,30 +64,15 @@ myApp.controller('userListsController', function($scope,$http,$cookies,$location
 	};
 
 	$scope.logout = function(){
-		var confirmLogout = confirm('Are you sure you want to logout?');
-		if (confirmLogout){
-			$cookies.remove('token');
-			$scope.userLoggedIn = false;
-			$scope.creds = {};
-			$location.path('login');
-		}
+		AuthService.logout();
 	};
 
-	// TO-DO: Make this a service or something
-	var startUserSession = function() {
-		$scope.userToken = $cookies.get('token');
-
-		if ($scope.userToken) {
-			$scope.user = jwtHelper.decodeToken($scope.userToken);
-			$scope.userLoggedIn = $scope.userToken ? true : false;
-			$scope.userIsAdmin = $scope.user.role === 'admin' ? true : false;
+	angular.element(document).ready(function () {
+		$scope.userSession = AuthService.startUserSession();
+		if ($scope.userSession.user) {
 			getLists();
 		} else {
 			$location.path('login');
 		}
-	};
-
-	angular.element(document).ready(function () {
-		startUserSession();
 	});
 });

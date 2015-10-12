@@ -1,4 +1,4 @@
-myApp.controller('loginController', function($scope,$http,$cookies,$location,jwtHelper) {
+myApp.controller('loginController', function($scope,$http,$cookies,$location,jwtHelper,AuthService) {
 	$scope.authFail = false;
 
 	$scope.login = function(formIsValid){
@@ -7,7 +7,9 @@ myApp.controller('loginController', function($scope,$http,$cookies,$location,jwt
 			.success(function(data){
 				if (data.success){
 					$cookies.put('token',data.token);
-					startUserSession();
+					$scope.userSession = AuthService.startUserSession();
+					$scope.user = $scope.userSession.user;
+					$scope.userLoggedIn = $scope.user ? true : false;
 					$location.path('user-lists');
 				} else {
 					$scope.authFail = true;
@@ -21,16 +23,18 @@ myApp.controller('loginController', function($scope,$http,$cookies,$location,jwt
 	};
 
 	// TO-DO: Make this a service or something
-	var startUserSession = function() {
-		$scope.userToken = $cookies.get('token');
+	// var startUserSession = function() {
+	// 	$scope.userToken = $cookies.get('token');
 
-		if ($scope.userToken) {
-			$scope.user = jwtHelper.decodeToken($scope.userToken);
-			$scope.userLoggedIn = $scope.userToken ? true : false;
-		}
-	};
+	// 	if ($scope.userToken) {
+	// 		$scope.user = jwtHelper.decodeToken($scope.userToken);
+	// 		$scope.userLoggedIn = $scope.userToken ? true : false;
+	// 	}
+	// };
 
 	angular.element(document).ready(function () {
-		startUserSession();
+		$scope.userSession = AuthService.startUserSession();
+		$scope.user = $scope.userSession.user;
+		$scope.userLoggedIn = $scope.user ? true : false;
 	});
 });

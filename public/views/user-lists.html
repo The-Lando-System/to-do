@@ -2,11 +2,11 @@
   <div class="in-line-left">
     <a ng-click="logout()" href="">Logout</a>
   </div>
-  <div class="in-line-right" ng-show="userIsAdmin">
+  <div class="in-line-right" ng-show="userSession.isAdmin">
     <a ui-sref="users">User Management</a>
   </div>
   <div class="jumbotron text-center clear">
-	  <h1>{{user.firstName}} {{user.lastName}}'s To-Do Lists</h1>
+	  <h1>{{userSession.user.firstName}} {{userSession.user.lastName}}'s To-Do Lists</h1>
   </div>
   <div id="user-lists" class="row">
     <div ng-repeat="list in lists">
@@ -20,9 +20,9 @@
   </div>
 
   <!-- FORM TO CREATE LIST -->
-  <div id="list-form" class="row text-center" ng-show="userLoggedIn">
+  <div id="list-form" class="row text-center" ng-show="userSession.user">
     <div class="col-xs-10 in-line-left">
-      <input id="listInput" type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newList.name">
+      <input id="listInput" type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newListName">
     </div>
     <div class="col-xs-2 in-line-left icon-button" ng-click="createList()">
       <i class="fa fa-plus"></i>
