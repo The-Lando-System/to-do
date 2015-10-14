@@ -1,4 +1,4 @@
-myApp.controller('userListsController', function($scope,$http,$cookies,$location,AuthService,jwtHelper,ListFactory,ListToDoFactory,ToDoFactory) {
+myApp.controller('userListsController', function($scope,$location,AuthService,jwtHelper,ListFactory,ListToDoFactory,ToDoFactory) {
 	
 	var getLists = function(){
 		ListFactory.get($scope.userSession.user.username,$scope.userSession.token)

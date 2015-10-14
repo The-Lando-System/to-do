@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="jumbotron text-center" ng-show="userLoggedIn">
+  <div class="jumbotron text-center" ng-show="userSession.user">
     <h1>You are already logged in!</h1>
     <a ui-sref="lists">Back to my lists</a>
   </div>
 
   <!-- FORM TO LOGIN -->
-  <div class="row" ng-hide="userLoggedIn">
+  <div class="row" ng-hide="userSession.user">
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <h2>Please Login</h2>
       <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>

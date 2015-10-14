@@ -1,4 +1,4 @@
-myApp.factory('AuthService', function($cookies,$location,jwtHelper) {
+myApp.factory('AuthService', function($http,$cookies,$location,jwtHelper) {
 
 	var authService = {};
 
@@ -22,6 +22,22 @@ myApp.factory('AuthService', function($cookies,$location,jwtHelper) {
 			$cookies.remove('token');
 			$location.path('login');
 		}
+	};
+
+	authService.login = function(creds){
+		$http.post('/authenticate',creds)
+		.success(function(data){
+			if (data.success){
+				$cookies.put('token',data.token);
+				$location.path('user-lists');
+				return true;
+			} else {
+				return false;
+			}
+		})
+		.error(function(data){
+			console.log('Error: ' + data);
+		});
 	};
 
 	return authService;
