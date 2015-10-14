@@ -1,7 +1,7 @@
-myApp.controller('userMgmtController', function($scope,$http,$cookies,$location,jwtHelper,UserFactory) {
+myApp.controller('userMgmtController', function($scope,$location,jwtHelper,AuthService,UserFactory) {
 
 	var getUsers = function(){
-		UserFactory.get($scope.userToken)
+		UserFactory.get($scope.userSession.token)
 		.success(function(data){
 			$scope.users = data;
 		})
@@ -14,7 +14,7 @@ myApp.controller('userMgmtController', function($scope,$http,$cookies,$location,
 		var confirmDelete = confirm('Are you sure you want to delete \'' + user.username + '\'?');
 
 		if (confirmDelete){
-			UserFactory.delete($scope.userToken,user._id)
+			UserFactory.delete($scope.userSession.token,user._id)
 			.success(function(data){
 				console.log(data);
 				getUsers();
@@ -25,21 +25,13 @@ myApp.controller('userMgmtController', function($scope,$http,$cookies,$location,
 		}
 	};
 
-	// TO-DO: Make this a service or something
-	var startUserSession = function() {
-		$scope.userToken = $cookies.get('token');
-
-		if ($scope.userToken) {
-			$scope.user = jwtHelper.decodeToken($scope.userToken);
-			$scope.userLoggedIn = $scope.userToken ? true : false;
+	angular.element(document).ready(function () {
+		$scope.userSession = AuthService.startUserSession();
+		if ($scope.userSession.user) {
 			getUsers();
 		} else {
 			$location.path('login');
 		}
-	};
-
-	angular.element(document).ready(function () {
-		startUserSession();
 	});
 
 });	

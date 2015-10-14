@@ -1,10 +1,10 @@
-myApp.controller('userController', function($scope,$http,$cookies,$location,$stateParams,jwtHelper,UserFactory) {
+myApp.controller('userController', function($scope,$location,$stateParams,jwtHelper,AuthService,UserFactory) {
 
 	var userId = $stateParams.userId || false;
 	$scope.editedUser = {}; 
 
 	var getUser = function() {
-		UserFactory.get($scope.userToken)
+		UserFactory.get($scope.userSession.token)
 		.success(function(users){
 			for (var i=0;i<users.length;i++){
 				if (users[i]._id === userId){
@@ -18,7 +18,7 @@ myApp.controller('userController', function($scope,$http,$cookies,$location,$sta
 	};
 
 	$scope.updateUser = function(){
-		UserFactory.edit($scope.userToken,$scope.editedUser._id,$scope.editedUser)
+		UserFactory.edit($scope.userSession.token,$scope.editedUser._id,$scope.editedUser)
 		.success(function(data){
 			alert(data.message);
 		})
@@ -28,7 +28,7 @@ myApp.controller('userController', function($scope,$http,$cookies,$location,$sta
 	};
 
 	$scope.createUser = function(){
-		UserFactory.create($scope.userToken,$scope.editedUser)
+		UserFactory.create($scope.userSession.token,$scope.editedUser)
 		.success(function(data){
 			alert(data.message);
 			$location.path('user-management');
@@ -38,21 +38,13 @@ myApp.controller('userController', function($scope,$http,$cookies,$location,$sta
 		});
 	};
 
-	// TO-DO: Make this a service or something
-	var startUserSession = function() {
-		$scope.userToken = $cookies.get('token');
-
-		if ($scope.userToken) {
-			$scope.user = jwtHelper.decodeToken($scope.userToken);
-			$scope.userLoggedIn = $scope.userToken ? true : false;
+	angular.element(document).ready(function () {
+		$scope.userSession = AuthService.startUserSession();
+		if ($scope.userSession.user) {
 			getUser();
 		} else {
 			$location.path('login');
 		}
-	};
-
-	angular.element(document).ready(function () {
-		startUserSession();
 		$scope.isCreate = userId ? false : true;
 	});
 });

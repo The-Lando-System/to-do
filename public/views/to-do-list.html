@@ -3,11 +3,11 @@
 
   <!-- HEADER AND TODO COUNT -->
   <div class="jumbotron text-center">
-    <h1>{{list.name}} <span class="label label-info" ng-show="userLoggedIn">{{ todos.length }}</span></h1>
+    <h1>{{list.name}} <span class="label label-info" ng-show="userSession.user">{{ todos.length }}</span></h1>
   </div>
 
   <!-- TODO LIST -->
-  <div id="todo-list" class="row" ng-show="userLoggedIn">
+  <div id="todo-list" class="row" ng-show="userSession.user">
     <div class="col-sm-4 col-sm-offset-4">
 
       <!-- LOOP OVER THE TODOS IN $scope.todos -->
@@ -21,7 +21,7 @@
   </div>
 
   <!-- FORM TO CREATE TODOS -->
-  <div id="todo-form" class="row" ng-show="userLoggedIn">
+  <div id="todo-form" class="row" ng-show="userSession.user">
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <form name="toDoForm" ng-submit="createTodo(toDoForm.$valid)" novalidate>
         <div class="form-group" ng-class="{ 'has-error' : errorAttempt }">

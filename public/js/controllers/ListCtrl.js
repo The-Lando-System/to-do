@@ -1,10 +1,10 @@
-myApp.controller('listController', function($scope,$http,$cookies,$location,$stateParams,jwtHelper,ToDoFactory,ListToDoFactory,ListFactory) {
+myApp.controller('listController', function($scope,$location,$stateParams,jwtHelper,AuthService,ToDoFactory,ListToDoFactory,ListFactory) {
 	$scope.formData = {};
 	$scope.listId = $stateParams.listId;
 
 	var getToDos = function(){
 		$scope.errorAttempt = false;
-		ListToDoFactory.get($scope.user.username,$scope.userToken,$scope.listId)
+		ListToDoFactory.get($scope.userSession.user.username,$scope.userSession.token,$scope.listId)
 		.success(function(data){
 			$scope.todos = data;
 		})
@@ -16,7 +16,7 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 
 	var getListData = function(){
 		$scope.errorAttempt = false;
-		ListFactory.get($scope.user.username,$scope.userToken)
+		ListFactory.get($scope.userSession.user.username,$scope.userSession.token)
 		.success(function(data){
 			for (var i=0;i<data.length;i++){
 				if (data[i]._id === $scope.listId) {
@@ -30,9 +30,9 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 	$scope.errorAttempt = false;
 	$scope.createTodo = function(formIsValid){
 		if (formIsValid){
-			ListToDoFactory.create($scope.user.username,$scope.userToken,$scope.listId,{
+			ListToDoFactory.create($scope.userSession.user.username,$scope.userSession.token,$scope.listId,{
 				text: $scope.formData.text.trim(),
-				username: $scope.user.username
+				username: $scope.userSession.user.username
 			})
 			.success(function(data){
 				$scope.formData = {};
@@ -49,7 +49,7 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 
 	$scope.deleteToDo = function(id){
 		$scope.errorAttempt = false;
-		ToDoFactory.delete($scope.user.username,$scope.userToken,id)
+		ToDoFactory.delete($scope.userSession.user.username,$scope.userSession.token,id)
 		.success(function(data){
 			$scope.todos = data;
 			console.log(data);
@@ -60,22 +60,14 @@ myApp.controller('listController', function($scope,$http,$cookies,$location,$sta
 		});
 	};
 
-	// TO-DO: Make this a service or something
-	var startUserSession = function() {
-		$scope.userToken = $cookies.get('token');
-
-		if ($scope.userToken) {
-			$scope.user = jwtHelper.decodeToken($scope.userToken);
-			$scope.userLoggedIn = $scope.userToken ? true : false;
+	angular.element(document).ready(function () {
+		$scope.userSession = AuthService.startUserSession();
+		if ($scope.userSession.user) {
 			getToDos();
 			getListData();
 		} else {
 			$location.path('login');
 		}
-	};
-
-	angular.element(document).ready(function () {
-		startUserSession();
 		$scope.errorAttempt = false;
 	});
 });

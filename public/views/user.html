@@ -1,4 +1,4 @@
-<div class="container" ng-show="userLoggedIn">
+<div class="container" ng-show="userSession.isAdmin">
   <a ui-sref="users">Back to user management</a>
   <div class="jumbotron text-center" ng-hide="isCreate">
     <h1>{{editedUser.firstName}}  {{editedUser.lastName}}</h1>
