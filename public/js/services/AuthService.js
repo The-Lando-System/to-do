@@ -24,15 +24,15 @@ myApp.factory('AuthService', function($http,$cookies,$location,jwtHelper) {
 		}
 	};
 
-	authService.login = function(creds){
+	authService.login = function(creds,callback){
 		$http.post('/authenticate',creds)
 		.success(function(data){
 			if (data.success){
 				$cookies.put('token',data.token);
 				$location.path('user-lists');
-				return true;
+				return callback(data);
 			} else {
-				return false;
+				return callback(data);
 			}
 		})
 		.error(function(data){

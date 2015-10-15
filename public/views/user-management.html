@@ -3,7 +3,7 @@
   <div class="jumbotron text-center">
     <h1>User Management</h1>
   </div>
-  <div ng-repeat="user in users" class="row">
+  <div id="users" ng-repeat="user in users" class="row container">
   	<div class="list-item col-xs-10 text-center" ui-sref="user-page({ userId:user._id })">
   	  {{ user.username }}
   	</div>

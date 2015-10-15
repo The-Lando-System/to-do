@@ -3,12 +3,14 @@ myApp.controller('loginController', function($scope,$location,jwtHelper,AuthServ
 
 	$scope.login = function(formIsValid){
 		if (formIsValid){
-			if (AuthService.login($scope.creds)){
-				$scope.userSession = AuthService.startUserSession();
-			} else {
-				$scope.authFail = true;
-				$scope.errorMessage = data.message;
-			}
+			AuthService.login($scope.creds, function(data){
+				if (data.success) {
+					$scope.userSession = AuthService.startUserSession();
+				} else {
+					$scope.authFail = true;
+					$scope.errorMessage = data.message;
+				}
+			});
 		}
 	};
 

@@ -43,7 +43,7 @@ myApp.controller('userController', function($scope,$location,$stateParams,jwtHel
 		if ($scope.userSession.user) {
 			getUser();
 		} else {
-			$location.path('login');
+			//$location.path('login');
 		}
 		$scope.isCreate = userId ? false : true;
 	});

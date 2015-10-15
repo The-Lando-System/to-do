@@ -8,7 +8,7 @@
   <div class="jumbotron text-center clear">
 	  <h1>{{userSession.user.firstName}} {{userSession.user.lastName}}'s To-Do Lists</h1>
   </div>
-  <div id="user-lists" class="row">
+  <div id="user-lists" class="row container">
     <div ng-repeat="list in lists">
       <div class="list-item col-xs-10 text-center" ui-sref="to-do-list({ listId:list._id })">
         {{list.name}}
@@ -20,7 +20,7 @@
   </div>
 
   <!-- FORM TO CREATE LIST -->
-  <div id="list-form" class="row text-center" ng-show="userSession.user">
+  <div id="list-form" class="row text-center container" ng-show="userSession.user">
     <div class="col-xs-10 in-line-left">
       <input id="listInput" type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newListName">
     </div>

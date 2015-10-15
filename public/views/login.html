@@ -4,10 +4,15 @@
     <a ui-sref="lists">Back to my lists</a>
   </div>
 
-  <!-- FORM TO LOGIN -->
+  <div class="jumbotron text-center">
+    <h1>To-Do App</h1>
+  </div>
+
   <div class="row" ng-hide="userSession.user">
     <div class="col-sm-8 col-sm-offset-2 text-center">
-      <h2>Please Login</h2>
+      <div class="login-text">
+        <h2>Please Login</h2>
+      </div>
       <form name="loginForm" ng-submit="login(loginForm.$valid)" novalidate>
         <div class="login-form-group" ng-class="{ 'has-error' : authFail && !loginForm.password.$pristine && !loginForm.username.$pristine }">
           <input type="text" name="username" class="form-control input-md text-center" placeholder="username" ng-model="creds.username" required>

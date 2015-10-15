@@ -8,6 +8,25 @@ html {
 
 body {
 	padding-top: 50px;
+	background-color: #545454;
+}
+
+a {
+	color: white;
+}
+
+a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+.jumbotron {
+	background-color: #2A2A2A;
+	color: white;
+}
+
+.login-text {
+	color: white;
 }
 
 #todo-list {
@@ -23,7 +42,7 @@ body {
 }
 
 .failed-auth p {
-	color: red;
+	color: #FF9D9D;
 	font-weight: bold;
 }
 
@@ -34,6 +53,10 @@ body {
 #user-lists {
 	margin-top: 10px;
 	margin-bottom: 30px;
+	text-align: center;
+}
+
+#users {
 	text-align: center;
 }
 
@@ -73,7 +96,7 @@ body {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin-bottom: 3px;
-	color: #3399FF;
+	color: #B5D3FF;
 }
 
 .list-item:hover {
@@ -81,8 +104,8 @@ body {
 	padding-bottom: 10px;
 	margin-bottom: 3px;
 	border-radius: 5px;
-	background-color: #3399FF;
-	color: white;
+	background-color: #B5D3FF;
+	color: black;
 	cursor: pointer;
 }
 
@@ -97,4 +120,8 @@ body {
 
 .user-create {
 	margin-top: 20px;
+}
+
+.checkbox {
+	color: white;	
 }
