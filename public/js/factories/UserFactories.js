@@ -14,6 +14,11 @@ myApp.factory('ToDoFactory', function($http) {
             return $http.delete('/user/' + username + '/todos/' + id, {
             	headers: { 'x-access-token': token }
             });
+        },
+        edit : function(username,token,editedTodo) {
+            return $http.put('/user/' + username + '/todos/' + editedTodo._id, editedTodo, {
+                headers: { 'x-access-token': token }
+            });
         }
     }
 });

@@ -60,6 +60,27 @@ myApp.controller('listController', function($scope,$location,$stateParams,jwtHel
 		});
 	};
 
+	$scope.beginEditToDo = function(id){
+		$scope.toDoToEditId = id;
+	};
+
+	$scope.isBeingEdited = function(id){
+		return $scope.toDoToEditId === id ? true : false;
+	};
+
+	$scope.updateToDo = function(editedTodo){
+		// $scope.errorAttempt = false;
+		ToDoFactory.edit($scope.userSession.user.username,$scope.userSession.token,editedTodo)
+		.success(function(data){
+			console.log(data);
+			$scope.toDoToEditId = '';
+			//getToDos();
+		})
+		.error(function(data){
+			console.log('Error: ' + data);
+		});
+	};
+
 	angular.element(document).ready(function () {
 		$scope.userSession = AuthService.startUserSession();
 		if ($scope.userSession.user) {

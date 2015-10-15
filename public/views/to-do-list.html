@@ -11,10 +11,25 @@
     <div class="col-sm-4 col-sm-offset-4">
 
       <!-- LOOP OVER THE TODOS IN $scope.todos -->
-      <div class="checkbox" ng-repeat="todo in todos">
-        <label>
+      <div class="container" ng-repeat="todo in todos">
+        <div class="todo-item col-xs-10" ng-click="beginEditToDo(todo._id)">
+          <div ng-hide="isBeingEdited(todo._id)">
+            {{ todo.text }}
+          </div>
+          <div ng-show="isBeingEdited(todo._id)">
+            <input type="text" class="form-control input-sm" ng-model="todo.text" required>
+          </div>
+        </div>
+        <div class="col-xs-2 icon-button-sm" ng-click="deleteToDo(todo._id)" ng-hide="isBeingEdited(todo._id)">
+          <i class="fa fa-trash"></i>
+        </div>
+        <div class="col-xs-2 icon-button-sm" ng-click="updateToDo(todo)" ng-show="isBeingEdited(todo._id)">
+          <i class="fa fa-check"></i>
+        </div>
+
+        <!-- <label>
           <input type="checkbox" ng-click="deleteToDo(todo._id)"> {{ todo.text }}
-        </label>
+        </label> -->
       </div>
 
     </div>

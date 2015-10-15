@@ -148,6 +148,20 @@ module.exports = function(app) {
 			res.json({ message: 'You are not authorized to delete to-dos for ' + req.params.username });
 		}
 	});
+	userApiRoutes.put('/:username/todos/:todo_id', function(req,res){
+		if (req.decoded.username === req.params.username) {
+			Todo.findById(req.params.todo_id, function(err,todo){
+				if (err) { res.send(err) };
+				todo.text = req.body.text;
+				todo.save(function(err){
+					if (err) { res.send(err) };
+					res.json({ message: 'Todo was successfully updated!' });
+				});
+			});
+		} else {
+			res.json({ message: 'You are not authorized to edit to-dos for ' + req.params.username });
+		}
+	});
 
 
 	app.use('/user',userApiRoutes);

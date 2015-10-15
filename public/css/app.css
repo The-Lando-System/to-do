@@ -92,6 +92,22 @@ a:hover {
 	cursor: pointer;
 }
 
+.icon-button-sm {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	margin-bottom: 3px;
+}
+
+.icon-button-sm:hover {
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-radius: 5px;
+	margin-bottom: 3px;
+	background-color: gray;
+	color: white;
+	cursor: pointer;
+}
+
 .list-item {
 	padding-top: 10px;
 	padding-bottom: 10px;
@@ -122,6 +138,16 @@ a:hover {
 	margin-top: 20px;
 }
 
-.checkbox {
-	color: white;	
+.todo-item {
+	color: white;
+	padding: 3px;
+	border-radius: 2px;
+}
+
+.todo-item:hover {
+	padding: 3px;
+	border-radius: 2px;
+	cursor: pointer;
+	background-color: gray;
+	color: black;
 }
