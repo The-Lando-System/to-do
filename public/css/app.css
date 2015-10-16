@@ -141,12 +141,12 @@ a:hover {
 .todo-item {
 	color: white;
 	padding: 3px;
-	border-radius: 2px;
+	border-radius: 5px;
 }
 
 .todo-item:hover {
 	padding: 3px;
-	border-radius: 2px;
+	border-radius: 5px;
 	cursor: pointer;
 	background-color: gray;
 	color: black;

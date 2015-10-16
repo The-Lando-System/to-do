@@ -1,41 +1,31 @@
 <div class="container">
   <a ui-sref="lists">Back to my lists</a>
 
-  <!-- HEADER AND TODO COUNT -->
   <div class="jumbotron text-center">
     <h1>{{list.name}} <span class="label label-info" ng-show="userSession.user">{{ todos.length }}</span></h1>
   </div>
 
-  <!-- TODO LIST -->
   <div id="todo-list" class="row" ng-show="userSession.user">
-    <div class="col-sm-4 col-sm-offset-4">
 
-      <!-- LOOP OVER THE TODOS IN $scope.todos -->
       <div class="container" ng-repeat="todo in todos">
         <div class="todo-item col-xs-10" ng-click="beginEditToDo(todo._id)">
           <div ng-hide="isBeingEdited(todo._id)">
             {{ todo.text }}
           </div>
           <div ng-show="isBeingEdited(todo._id)">
-            <input type="text" class="form-control input-sm" ng-model="todo.text" required>
+            <input id="editMode" type="text" class="form-control input-sm" ng-model="todo.text" ng-blur="updateToDo(todo)" show-focus="isBeingEdited(todo._id)" required>
           </div>
         </div>
-        <div class="col-xs-2 icon-button-sm" ng-click="deleteToDo(todo._id)" ng-hide="isBeingEdited(todo._id)">
+        <div class="col-xs-2 icon-button-sm text-center" ng-click="deleteToDo(todo._id)" ng-hide="isBeingEdited(todo._id)">
           <i class="fa fa-trash"></i>
         </div>
-        <div class="col-xs-2 icon-button-sm" ng-click="updateToDo(todo)" ng-show="isBeingEdited(todo._id)">
+        <!-- Doesn't actually do anything, just here for show -->
+        <div class="col-xs-2 icon-button-sm text-center" ng-show="isBeingEdited(todo._id)">
           <i class="fa fa-check"></i>
         </div>
-
-        <!-- <label>
-          <input type="checkbox" ng-click="deleteToDo(todo._id)"> {{ todo.text }}
-        </label> -->
       </div>
-
-    </div>
   </div>
 
-  <!-- FORM TO CREATE TODOS -->
   <div id="todo-form" class="row" ng-show="userSession.user">
     <div class="col-sm-8 col-sm-offset-2 text-center">
       <form name="toDoForm" ng-submit="createTodo(toDoForm.$valid)" novalidate>

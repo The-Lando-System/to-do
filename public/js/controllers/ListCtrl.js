@@ -64,17 +64,16 @@ myApp.controller('listController', function($scope,$location,$stateParams,jwtHel
 		$scope.toDoToEditId = id;
 	};
 
-	$scope.isBeingEdited = function(id){
-		return $scope.toDoToEditId === id ? true : false;
+	$scope.isBeingEdited = function(id,callback){
+		$scope.editMode = $scope.toDoToEditId === id ? true : false;
+		return $scope.editMode;
 	};
 
 	$scope.updateToDo = function(editedTodo){
-		// $scope.errorAttempt = false;
 		ToDoFactory.edit($scope.userSession.user.username,$scope.userSession.token,editedTodo)
 		.success(function(data){
 			console.log(data);
 			$scope.toDoToEditId = '';
-			//getToDos();
 		})
 		.error(function(data){
 			console.log('Error: ' + data);
