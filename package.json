@@ -16,7 +16,6 @@
     "debug": "~2.0.0"
   },
   "scripts": {
-    "postinstall": "bower install",
     "prestart": "npm install",
     "start": "node ./bin/www"
   }

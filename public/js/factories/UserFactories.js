@@ -38,6 +38,11 @@ myApp.factory('ListFactory', function($http) {
             return $http.delete('/user/' + username + '/lists/' + id, {
                 headers: { 'x-access-token': token }
             });
+        },
+        edit : function(username,token,id,newList) {
+            return $http.put('/user/' + username + '/lists/' + id, newList, {
+                headers: { 'x-access-token': token }
+            });
         }
     }
 });

@@ -65,6 +65,20 @@ module.exports = function(app) {
 			res.json({ message: 'You are not authorized to delete to-do lists for ' + req.params.username });
 		}
 	});
+	userApiRoutes.put('/:username/lists/:list_id', function(req,res){
+		if (req.decoded.username === req.params.username) {
+			List.findById(req.params.list_id, function(err,list){
+				if (err) { res.send(err) };
+				list.name = req.body.name;
+				list.save(function(err){
+					if (err) { res.send(err) };
+					res.json({ message: 'List name was successfully updated!' });
+				});
+			});
+		} else {
+			res.json({ message: 'You are not authorized to edit list name for ' + req.params.username });
+		}
+	});
 
 
 	// User To-Do's for a specific list =============================

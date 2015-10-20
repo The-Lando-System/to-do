@@ -1,8 +1,13 @@
 <div class="container">
   <a ui-sref="lists">Back to my lists</a>
 
-  <div class="jumbotron text-center">
-    <h1>{{list.name}} <span class="label label-info" ng-show="userSession.user">{{ todos.length }}</span></h1>
+  <div class="jumbotron text-center" ng-click="beginEditListName()" ng-hide="editingListName">
+    <h1><span id="list-name">{{list.name}}</span> <span class="label label-info" ng-show="userSession.user">{{ todos.length }}</span></h1>
+  </div>
+  <div class="jumbotron text-center" ng-show="editingListName">
+    <div class="container">
+      <input type="text" class="form-control input-lg" ng-model="list.name" ng-blur="updateListName()" required show-focus="editingListName">
+    </div>
   </div>
 
   <div id="todo-list" class="row" ng-show="userSession.user">

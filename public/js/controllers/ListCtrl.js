@@ -1,6 +1,7 @@
 myApp.controller('listController', function($scope,$location,$stateParams,jwtHelper,AuthService,ToDoFactory,ListToDoFactory,ListFactory) {
 	$scope.formData = {};
 	$scope.listId = $stateParams.listId;
+	$scope.editingListName = false;
 
 	var getToDos = function(){
 		$scope.errorAttempt = false;
@@ -78,6 +79,19 @@ myApp.controller('listController', function($scope,$location,$stateParams,jwtHel
 		.error(function(data){
 			console.log('Error: ' + data);
 		});
+	};
+
+	$scope.beginEditListName = function(){
+		$scope.editingListName = true;
+	};
+
+	$scope.updateListName = function(){
+		ListFactory.edit($scope.userSession.user.username,$scope.userSession.token,$scope.listId,$scope.list)
+		.success(function(data){
+			console.log(data);
+		})
+
+		$scope.editingListName = false;
 	};
 
 	angular.element(document).ready(function () {

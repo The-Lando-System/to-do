@@ -151,3 +151,7 @@ a:hover {
 	background-color: gray;
 	color: black;
 }
+
+#list-name:hover {
+	cursor: pointer;
+}
