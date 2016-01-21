@@ -1,23 +1,22 @@
 {
   "name": "node-todo-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Basic To-Do App",
-  "main": "server.js",
   "author": "The-Lando-System",
   "dependencies": {
-    "bower": "^1.3.1",
-    "body-parser": "^1.13.3",
-    "express": "^4.13.3",
-    "method-override": "^2.3.5",
-    "mongoose": "^4.1.7",
-    "morgan": "^1.6.1",
-    "serve-favicon": "*",
-    "jsonwebtoken": "^5.0.5",
-    "debug": "~2.0.0"
+    "bower": "latest",
+    "body-parser": "latest",
+    "express": "latest",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "serve-favicon": "latest",
+    "jsonwebtoken": "latest",
+    "nodemon":"latest"
   },
   "scripts": {
     "postinstall": "bower install",
     "prestart": "npm install",
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   }
 }

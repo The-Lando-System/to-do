@@ -4,7 +4,7 @@ myApp.factory('AuthService', function($http,$cookies,$location,jwtHelper) {
 
 	authService.startUserSession = function() {
 		var token = $cookies.get('token') ? $cookies.get('token') : false;
-		var user = token ? jwtHelper.decodeToken(token) : false;
+		var user = token ? jwtHelper.decodeToken(token)._doc : false;
 		var isAdmin = false;
 		if (user.role){
 			isAdmin = user.role === 'admin' ? true : false;

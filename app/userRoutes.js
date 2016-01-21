@@ -16,7 +16,7 @@ module.exports = function(app) {
 				if (err) {
 					return res.json({ success: false, message: 'Failed to authenticate token!'});
 				} else {
-					req.decoded = decoded;
+					req.decoded = decoded._doc;
 					next();
 				}
 			});

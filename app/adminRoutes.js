@@ -16,8 +16,8 @@ module.exports = function(app) {
 				if (err) {
 					return res.json({ success: false, message: 'Failed to authenticate token!'});
 				} else {
-					if (decoded.role === 'admin'){
-						req.decoded = decoded;
+					if (decoded._doc.role === 'admin'){
+						req.decoded = decoded._doc;
 						next();
 					}
 				}

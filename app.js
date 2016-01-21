@@ -8,18 +8,25 @@ var methodOverride = require('method-override');
 var favicon = require('serve-favicon');
 
 // Configuration ======================
+console.log("----- Configuration -----");
 var devConfig = false;
 try {
 	devConfig = require('./config/config');
-	console.log('Found development config file; using development environment variables')
+	console.log('[x] Found Dev Config File! Happy Debugging!');
 } catch(err) {
-	console.log('No config file detected, assuming production environment variables')
+	console.log('[x] No Dev Config File... Going into Production!');
 }
 
 var dbUrl =  devConfig ? devConfig.db : process.env.DB_URL;
 var secretStr = devConfig ? devConfig.secret : process.env.SECRET;
 
-mongoose.connect(dbUrl);
+try {
+	mongoose.connect(dbUrl);
+	console.log('[x] Successfully Connected to Mongo!');
+} catch(err) {
+	console.log('[] Failed to Connect to Mongo.....');
+}
+
 app.set('superSecret', secretStr);
 
 app.use(express.static(__dirname + '/public'));
@@ -37,3 +44,4 @@ require('./app/routes')(app);
 
 // Export the app ======================
 exports = module.exports = app;
+console.log("------> Ready! <---------");
