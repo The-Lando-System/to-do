@@ -67,6 +67,11 @@ myApp.controller('userListsController', function($scope,$location,AuthService,jw
 		AuthService.logout();
 	};
 
+	$scope.openSidebar = function(){
+
+		angular.element('.sidebar').animate({'left': '0px'},300);
+	};
+
 	angular.element(document).ready(function () {
 		$scope.userSession = AuthService.startUserSession();
 		if ($scope.userSession.user) {

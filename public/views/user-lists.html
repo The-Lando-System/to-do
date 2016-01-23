@@ -1,31 +1,41 @@
-<div class="container">
-  <div class="in-line-left">
-    <a ng-click="logout()" href="">Logout</a>
-  </div>
-  <div class="in-line-right" ng-show="userSession.isAdmin">
-    <a ui-sref="users">User Management</a>
-  </div>
-  <div class="jumbotron text-center clear">
-	  <h1>{{userSession.user.firstName}} {{userSession.user.lastName}}'s To-Do Lists</h1>
-  </div>
-  <div id="user-lists" class="row container">
-    <div ng-repeat="list in lists">
-      <div class="list-item col-xs-10 text-center" ui-sref="to-do-list({ listId:list._id })">
-        {{list.name}}
-      </div>
-      <div class="col-xs-2 icon-button" ng-click="deleteList(list._id)">
-        <i class="fa fa-trash"></i>
-      </div>
-    </div>
-  </div>
+<div class="sidebar">
 
-  <!-- FORM TO CREATE LIST -->
-  <div id="list-form" class="row text-center container" ng-show="userSession.user">
-    <div class="col-xs-10 in-line-left">
-      <input id="listInput" type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newListName">
+</div>
+<div class="main-content">
+  <div class="container">
+    <div class="in-line-right" ng-show="userSession.isAdmin">
+      <a ui-sref="users">User Management</a>
     </div>
-    <div class="col-xs-2 in-line-left icon-button" ng-click="createList()">
-      <i class="fa fa-plus"></i>
+    <div class="jumbotron clear">
+      <div class="text-center">
+        <h1>{{userSession.user.firstName}} {{userSession.user.lastName}}'s To-Do Lists</h1>
+      </div>
+      <div class="options-arrow in-line-left">
+        <a ng-click="openSidebar()" href=""><i class="fa fa-arrow-left"></i></a>
+      </div>
+      <div class="logout-style in-line-right">
+        <a ng-click="logout()" href=""><i class="fa fa-sign-out"></i></a>
+      </div>
+    </div>
+    <div id="user-lists" class="row container">
+      <div ng-repeat="list in lists">
+        <div class="list-item col-xs-10 text-center" ui-sref="to-do-list({ listId:list._id })">
+          {{list.name}}
+        </div>
+        <div class="col-xs-2 icon-button" ng-click="deleteList(list._id)">
+          <i class="fa fa-trash"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORM TO CREATE LIST -->
+    <div id="list-form" class="row text-center container" ng-show="userSession.user">
+      <div class="col-xs-10 in-line-left">
+        <input id="listInput" type="text" class="form-control input-lg text-center" placeholder="Create a new list" ng-model="newListName">
+      </div>
+      <div class="col-xs-2 in-line-left icon-button" ng-click="createList()">
+        <i class="fa fa-plus"></i>
+      </div>
     </div>
   </div>
 </div>

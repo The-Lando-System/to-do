@@ -2,7 +2,8 @@ var myApp = angular.module('myApp', [
 	'ngCookies',
 	'angular-jwt',
 	'ngRoute',
-	'ui.router'
+	'ui.router',
+	'ngAnimate'
 ])
 
 .config(['$urlRouterProvider','$stateProvider', function($urlRouterProvider,$stateProvider) {
