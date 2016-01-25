@@ -68,8 +68,13 @@ myApp.controller('userListsController', function($scope,$location,AuthService,jw
 	};
 
 	$scope.openSidebar = function(){
-
+		//angular.element('.main-content').animate({'left': '100px'},300);
 		angular.element('.sidebar').animate({'left': '0px'},300);
+	};
+
+	$scope.closeSidebar = function(){
+		//angular.element('.main-content').animate({'left': '0px'},300);
+		angular.element('.sidebar').animate({'left': '-205px'},300);
 	};
 
 	angular.element(document).ready(function () {

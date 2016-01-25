@@ -1,7 +1,8 @@
 <div class="container">
+  <div class="in-line-left">
   <a ui-sref="lists">Back to my lists</a>
-
-  <div class="jumbotron text-center" ng-click="beginEditListName()" ng-hide="editingListName">
+  </div>
+  <div class="jumbotron text-center clear" ng-click="beginEditListName()" ng-hide="editingListName">
     <h1><span id="list-name">{{list.name}}</span> <span class="label label-info" ng-show="userSession.user">{{ todos.length }}</span></h1>
   </div>
   <div class="jumbotron text-center" ng-show="editingListName">

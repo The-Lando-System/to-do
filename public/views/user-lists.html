@@ -1,5 +1,16 @@
 <div class="sidebar">
+  <div class="container options-list">
+    <div class="option-list-item text-center">
+      Edit User Profile
+    </div>
+    <div class="option-list-item text-center">
+      Change Theme
+    </div>
+  </div>
 
+  <div class="close-sidebar">
+    <a ng-click="closeSidebar()" href=""><i class="fa fa-arrow-left" style="color:black;"></i></a>
+  </div>
 </div>
 <div class="main-content">
   <div class="container">
@@ -10,8 +21,8 @@
       <div class="text-center">
         <h1>{{userSession.user.firstName}} {{userSession.user.lastName}}'s To-Do Lists</h1>
       </div>
-      <div class="options-arrow in-line-left">
-        <a ng-click="openSidebar()" href=""><i class="fa fa-arrow-left"></i></a>
+      <div class="options-icon in-line-left">
+        <a ng-click="openSidebar()" href=""><i class="fa fa-bars"></i></a>
       </div>
       <div class="logout-style in-line-right">
         <a ng-click="logout()" href=""><i class="fa fa-sign-out"></i></a>

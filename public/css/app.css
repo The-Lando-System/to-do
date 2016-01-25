@@ -171,7 +171,7 @@ a:hover {
 	color: white;
 }
 
-.options-arrow {
+.options-icon {
 	margin-left: 10px;
 }
 
@@ -180,14 +180,45 @@ a:hover {
 }
 
 .main-content {
-
+	position: fixed;
+	left: 0;
 }
 
 .sidebar {
 	z-index: 1000;
 	height: 100%;
-	background-color: green;
+	background-color: #e1eaea;
 	position: fixed;
-	width: 100px;
-	left: -100px;
+	width: 200px;
+	left: -205px;
+	-webkit-box-shadow: 2px 0px 7px -1px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 0px 7px -1px rgba(0,0,0,0.75);
+	box-shadow: 2px 0px 7px -1px rgba(0,0,0,0.75);
+}
+
+.close-sidebar {
+	position: absolute;
+  	top: 50%;
+  	left: 90%;
+}
+
+.options-list {
+	margin-top: 100px;
+}
+
+.option-list-item {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 3px;
+	color: black;
+}
+
+.option-list-item:hover {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-bottom: 3px;
+	border-radius: 5px;
+	background-color: #547878;
+	color: white;
+	cursor: pointer;
 }
